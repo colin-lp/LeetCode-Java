@@ -5,7 +5,6 @@ class Solution {
         System.out.println(result);
     }
     public boolean judgeCircle(String moves) {
-        boolean result=false;
         int x=0;
         int y=0;
         for(int i=0;i<moves.length();i++){
