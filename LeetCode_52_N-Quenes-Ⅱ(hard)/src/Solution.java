@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 class Solution {
     public static void main(String[] args) {
         Solution s=new Solution();
@@ -6,33 +8,30 @@ class Solution {
     }
     int result = 0;
 
+    HashSet<Integer> col=new HashSet<>();
+    HashSet<Integer> diagonals1=new HashSet<>();
+    HashSet<Integer> diagonals2=new HashSet<>();
     public int totalNQueens(int n) {
-        int[] pos=new int[n];
-        dfs(0,n,pos);
-        return result;
+        return dfs(n,0);
     }
 
-    private void dfs(int cur,int n, int[] pos) {
+    private int dfs(int n,int row){
+        if(row==n) return 1;
+        int count=0;
         for(int i=0;i<n;i++){
-            if(check(cur,i,n,pos)){
-                pos[cur]=i;
-                if(cur==n-1){
-                    this.result++;
-                }else{
-                    dfs(cur+1,n,pos);
-                }
-            }
+            if(col.contains(i)) continue;
+            int dia1=row-i;
+            if(diagonals1.contains(dia1)) continue;
+            int dia2=row+i;
+            if(diagonals1.contains(dia2)) continue;
+            col.add(i);
+            diagonals1.add(i);
+            diagonals2.add(i);
+            count+=dfs(n,row+1);
+            col.remove(i);
+            diagonals1.remove(i);
+            diagonals2.remove(i);
         }
-    }
-
-    private boolean check(int cur,int i,int n,int[] pos) {
-        if(cur==0) return true;
-        for(int j=0;j<cur;j++){
-            //行间距和列差距一样则在对角线上
-            if(pos[j]==i|| Math.abs(cur-j) == Math.abs(i-pos[j])){
-                return false;
-            }
-        }
-        return true;
+        return count;
     }
 }
