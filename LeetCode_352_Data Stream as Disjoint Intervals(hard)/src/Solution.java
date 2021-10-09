@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
+    public static void main(String[] args) {
+        SummaryRanges summaryRanges = new SummaryRanges();
+        summaryRanges.addNum(1);
+        summaryRanges.addNum(3);
+        summaryRanges.addNum(0);
+        int[][] rst = summaryRanges.getIntervals();
+        System.out.println();
+    }
 
     static class SummaryRanges {
 
@@ -17,6 +25,7 @@ public class Solution {
             int left = 0, right = list.size() - 1;
             while (left < right) {
                 //+1：因为有哨兵头元素
+                //虽然在[-10,-10] 和[1,1]为left right时会选择后者为right，但最后查找结果肯定会回到哨兵元素
                 int mid = (right - left + 1) / 2 + left;
                 //0 [-10,-10] [1,1] [3,3] 因为有头哨兵，所以下面的add是在left+1
                 if (list.get(mid)[0] <= val) {
