@@ -18,7 +18,7 @@ public class Solution {
             while (left < right) {
                 //+1：因为有哨兵头元素
                 int mid = (right - left + 1) / 2 + left;
-                //0 [-10,-10] [1,1] [3,3] 因为有头哨兵，所以下面的add是在right+1
+                //0 [-10,-10] [1,1] [3,3] 因为有头哨兵，所以下面的add是在left+1
                 if (list.get(mid)[0] <= val) {
                     left = mid;
                 } else {
@@ -26,19 +26,19 @@ public class Solution {
                 }
             }
             int[] cur = new int[]{val, val};
-            int[] prev = list.get(right);
-            int[] next = list.get(right + 1);
+            int[] prev = list.get(left);
+            int[] next = list.get(left + 1);
             if ((prev[0] <= val && prev[1] >= val) || (next[0] <= val && next[1] >= val)) {
 
             } else if (val == prev[1] + 1 && val == next[0] - 1) {
                 prev[1] = next[1];
-                list.remove(right + 1);
+                list.remove(left + 1);
             } else if (prev[1] + 1 == val) {
                 prev[1] = val;
             } else if (next[0] - 1 == val) {
                 next[0] = val;
             } else {
-                list.add(right + 1, cur);
+                list.add(left + 1, cur);
             }
         }
 
