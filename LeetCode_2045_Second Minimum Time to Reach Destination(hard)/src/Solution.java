@@ -34,7 +34,9 @@ public class Solution {
             for (int i = 0; i < graph[node].size(); i++) {
                 int tempNode = graph[node].get(i);
                 if (length < path[tempNode][0]) {
+                    int temp = path[tempNode][0];
                     path[tempNode][0] = length;
+                    path[tempNode][1] = temp;
                     queue.offer(new int[]{tempNode, length});
                 } else if (length > path[tempNode][0] && length < path[tempNode][1]) {
                     path[tempNode][1] = length;
