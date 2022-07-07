@@ -1,7 +1,12 @@
 public class Solution {
+    public static void main(String[] args) {
+        Solution s=new Solution();
+        String r=s.longestPalindrome("ac");
+        System.out.println(r);
+    }
     public String longestPalindrome(String s) {
         int len = s.length();
-        if (len <= 2) return s;
+        if (len < 2) return s;
         char[] chars = s.toCharArray();
         boolean[][] dp = new boolean[len][len];
         int maxL = 0, max = 1;
